@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include <string>
 
 #pragma comment (lib, "User32.lib")
 #pragma comment (lib, "Gdi32.lib") // settextcolor
@@ -193,7 +194,8 @@ public:
          push edx
          mov  edx, offset goodbye_message
          push edx
-         push dword ptr 0
+         xor edx, edx
+         push edx
          call MessageBoxA
 
          push dword ptr [esi + 0xC]
@@ -330,12 +332,20 @@ public:
          jmp default_condition
 
       destroy_window:
+
          xor eax, eax
          push eax
          call PostQuitMessage
          jmp return_zero
 
-      render_text_message :
+      render_text_message:
+         _emit 'i'
+         _emit 'n'
+         _emit 'l'
+         _emit 'i'
+         _emit 'n'
+         _emit 'e'
+         _emit ' '
          _emit 'a'
          _emit 's'
          _emit 'm'
